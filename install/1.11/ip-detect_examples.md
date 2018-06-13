@@ -19,12 +19,12 @@ curl -fsSL -H "Metadata-Flavor: Google" http://169.254.169.254/computeMetadata/v
 ```
 
 ### Interface Identifier
-Using the IP address of a specivied interface
+Using the IP address of a specivied interface (change <interfaceId> on 4th line to desired interface
 ```
 #!/usr/bin/env bash
 set -o nounset -o errexit
 export PATH=/usr/sbin:/usr/bin:$PATH
-echo $(ip addr show eth0 | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
+echo $(ip addr show <interfaceId> | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 ```
 
 ### Route to Mesos Master
