@@ -63,7 +63,7 @@ ssh_user: <linuxUserID>
 EOF
 
 ### Get the DC/OS 1.11 Bits
-curl -O https://downloads.mesosphere.com/dcos-enterprise/stable/1.11.0/dcos_generate_config.ee.sh
+curl -O https://downloads.mesosphere.com/dcos-enterprise/stable/1.11.4/dcos_generate_config.ee.sh
 
 ### Creat Password Hash
 Put the output of this command in the it in config.yaml
