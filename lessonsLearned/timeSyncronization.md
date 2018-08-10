@@ -2,12 +2,21 @@
 
 DC/OS Masters are very sensitive to their internal clocks being synchronized.  a drift as little as 500ms can mean the differencve between a healthy cluster and an unhealthy one.  NTP is the prefered method of synchronizing time clocks
 
+## Is NTP Running
+Enter one of the following commands to determine whether NTP is running:
+```
+ntptime
+adjtimex -p
+timedatectl
+```
+## Install NTP
+There are many examples on the Internet on how to install nyp.  Here is one:
+`http://www.tecmint.com/install-ntp-server-in-centos/`
+
 ## Install and Enable NTP for DC/OS
 If you do not have NTP installed, follow the below process.  If you have local NTP servers, use those instead of the Internet ones.
 
-
 ## CHRONY v. NTP
-
 By default, Centos and RedHat install with Chrony enabled and NTP disabled.  Even if NTP is installed, CHRONY being installed and running can prevent NTP from running.  As most organizations have access to NTP servers, I prefer NTP.  Below is a process to determine Ensure NTP is Running
 
 Is CHRONY Running? `systemctl status chronyd`
