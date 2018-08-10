@@ -38,16 +38,14 @@ If not, there are many blogs on the Internet that describe how to install and co
 http://www.tecmint.com/install-ntp-server-in-centos/
 ```
 
-How do I configure NTP to run at system start?
+#### How do I configure NTP to run at system start?
 ```
 $ systemctl enable ntpd.service
 ```
 
-
-## Synchronize Hardware & Software CLocks
-To synchronize the hardware and software clocks of your server, run the following:
+#### How do I synchronize hardware and software clocks?
 ```
-hwclock -w
+$ hwclock -w
 ```
 
 ## CHRONY v. NTP
