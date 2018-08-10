@@ -13,7 +13,7 @@ If installed and enabled, you should get a response similar to the following:
 ```
 ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 ```
-If not, there are many blogs on the Internet that describe how to install NTP.  Hereis one:
+If not, there are many blogs on the Internet that describe how to install NTP.  Here is one:
 ```
 http://www.tecmint.com/install-ntp-server-in-centos/
 ```
