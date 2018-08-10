@@ -1,6 +1,7 @@
 
 
 
+I use this to identify the public-facing IP address for my home Router.
 
 ```
 #!/usr/bin/env bash
