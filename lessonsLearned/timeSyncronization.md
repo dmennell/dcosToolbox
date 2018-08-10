@@ -9,22 +9,8 @@ ntptime
 adjtimex -p
 timedatectl
 ```
-Is NTP Installed?
 
-Is NTP installed to run as a service at system start:
-```
-$ chkconfig --list ntpd
-```
-If installed and enabled, you should get a response similar to the following:
-```
-ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
-```
-If not, there are many blogs on the Internet that describe how to install and configure NTP.  Here is one:
-```
-http://www.tecmint.com/install-ntp-server-in-centos/
-```
-
-Is NTP up and running?
+#### Is NTP Running?
 ```
 $ ntpq -p
 ```
@@ -38,11 +24,24 @@ ms21.snowflakeh .STEP.          16 u    - 1024    0    0.000    0.000   0.000
 rs11.lvs.iif.hu .STEP.          16 u    - 1024    0    0.000    0.000   0.000
 2001:470:28:bde .STEP.          16 u    - 1024    0    0.000    0.000   0.000
 ```
+
+#### Is NTP configured to run as a service at system start?
+```
+$ chkconfig --list ntpd
+```
+If installed and enabled, you should get a response similar to the following:
+```
+ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+```
+If not, there are many blogs on the Internet that describe how to install and configure NTP.  Here is one:
+```
+http://www.tecmint.com/install-ntp-server-in-centos/
+```
+
 How do I configure NTP to run at system start?
 ```
 $ systemctl enable ntpd.service
 ```
-How do I start NTP?
 
 
 ## Synchronize Hardware & Software CLocks
