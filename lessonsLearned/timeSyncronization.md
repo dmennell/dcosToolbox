@@ -1,8 +1,8 @@
-#Time Synchronization with DC/OS
+# Time Synchronization with DC/OS
 
 DC/OS Masters are very sensitive to their internal clocks being synchronized.  a drift as little as 500ms can mean the differencve between a healthy cluster and an unhealthy one.
 
-##CHRONY v. NTP
+## CHRONY v. NTP
 
 By default, Centos and RedHat install with Chrony enabled and NTP disabled.  Even if NTP is installed, CHRONY being installed and running can prevent NTP from running.  As most organizations have access to NTP servers, I prefer NTP.  Below is a process to determine Ensure NTP is Running
 
