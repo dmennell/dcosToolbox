@@ -11,13 +11,12 @@ timedatectl
 ```
 ## Install NTP
 There are many examples on the Internet on how to install nyp.  Here is one:
-`http://www.tecmint.com/install-ntp-server-in-centos/`
-
-## Install and Enable NTP for DC/OS
-If you do not have NTP installed, follow the below process.  If you have local NTP servers, use those instead of the Internet ones.
+```
+http://www.tecmint.com/install-ntp-server-in-centos/
+```
 
 ## CHRONY v. NTP
-By default, Centos and RedHat install with Chrony enabled and NTP disabled.  Even if NTP is installed, CHRONY being installed and running can prevent NTP from running.  As most organizations have access to NTP servers, I prefer NTP.  Below is a process to determine Ensure NTP is Running
+By default, Centos and RedHat install with Chrony enabled.  Even if NTP is installed, CHRONY being installed and running can prevent NTP from running.  As most organizations have access to NTP servers, I prefer NTP.  Below is a process to determine Ensure NTP is Running
 
 Is CHRONY Running? `systemctl status chronyd`
 Is NTP Running? `systemctl status chronyd`
@@ -32,7 +31,10 @@ Follow the below instructions to disable chrony and enable ntp.
 5.  View current status of ntpd `ntpq -p`
 
 ## Force NTP Synchronization
-To force a synchronization of NTP, enter this `systemctl stop ntpd; ntpd -gq; systemctl start ntpd`
+To force a synchronization of NTP, enter this:
+```
+systemctl stop ntpd; ntpd -gq; systemctl start ntpd
+```
 
 ## Dealing With Large Drift
 If a clock is too far out of sync, it may not correctly synchronize with the NTP server.  To configure NTP to ignore a large drift, do the following:
