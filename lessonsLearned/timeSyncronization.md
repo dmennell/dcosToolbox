@@ -3,41 +3,49 @@
 DC/OS Masters are very sensitive to their internal clocks being synchronized.  Drift as little as 500ms can mean the difference between a healthy cluster and an unhealthy one.  NTP is the prefered method of synchronizing time clocks.
 
 ## Is NTP Installed and Running?
-The below steps check whether NTP is installed and running.
-
-### Check to see whether or not NTP is installed:
-```
-$ chkconfig --list ntpd
-```
-If installed and enabled, you should get a response similar to the following:
-```
-ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
-```
-If not, there are many blogs on the Internet that describe how to install NTP.  Here is one:
-```
-http://www.tecmint.com/install-ntp-server-in-centos/
-```
-### Check to see whether or not NTP is running:
-```
-$ ntpq -p
-```
-If NTP is runing, you should get a response similar to the following:
-```
-     remote           refid      st t when poll reach   delay   offset  jitter
-==============================================================================
-+clock.util.phx2 .CDMA.           1 u  111  128  377  175.495    3.076   2.250
-*clock02.util.ph .CDMA.           1 u   69  128  377  175.357    7.641   3.671
- ms21.snowflakeh .STEP.          16 u    - 1024    0    0.000    0.000   0.000
- rs11.lvs.iif.hu .STEP.          16 u    - 1024    0    0.000    0.000   0.000
- 2001:470:28:bde .STEP.          16 u    - 1024    0    0.000    0.000   0.000
-```
-
-Here are some other commants that can be used to check NTP status:
+The below steps check whether NTP is installed and running.  Here are some base commands that will give you information about NTP:
 ```
 ntptime
 adjtimex -p
 timedatectl
 ```
+Is NTP Installed?
+
+
+
+Is NTP installed to run as a service at system start:
+```
+$ chkconfig --list ntpd
+```
+     If installed and enabled, you should get a response similar to the following:
+     ```
+     ntpd           	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+     ```
+     If not, there are many blogs on the Internet that describe how to install and configure NTP.  Here is one:
+     ```
+     http://www.tecmint.com/install-ntp-server-in-centos/
+     ```
+
+Is NTP up and running?
+```
+$ ntpq -p
+```
+     If NTP is runing, you should get a response similar to the following:
+     ```
+          remote           refid      st t when poll reach   delay   offset  jitter
+     ==============================================================================
+     +clock.util.phx2 .CDMA.           1 u  111  128  377  175.495    3.076   2.250
+     *clock02.util.ph .CDMA.           1 u   69  128  377  175.357    7.641   3.671
+     ms21.snowflakeh .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+     rs11.lvs.iif.hu .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+     2001:470:28:bde .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+     ```
+How do I configure NTP to run at system start?
+```
+$ systemctl enable ntpd.service
+```
+How do I start NTP?
+
 
 ## Synchronize Hardware & Software CLocks
 To synchronize the hardware and software clocks of your server, run the following:
