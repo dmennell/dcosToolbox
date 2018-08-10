@@ -28,16 +28,16 @@ Is NTP up and running?
 ```
 $ ntpq -p
 ```
-     If NTP is runing, you should get a response similar to the following:
-     ```
-          remote           refid      st t when poll reach   delay   offset  jitter
-     ==============================================================================
-     +clock.util.phx2 .CDMA.           1 u  111  128  377  175.495    3.076   2.250
-     *clock02.util.ph .CDMA.           1 u   69  128  377  175.357    7.641   3.671
-     ms21.snowflakeh .STEP.          16 u    - 1024    0    0.000    0.000   0.000
-     rs11.lvs.iif.hu .STEP.          16 u    - 1024    0    0.000    0.000   0.000
-     2001:470:28:bde .STEP.          16 u    - 1024    0    0.000    0.000   0.000
-     ```
+If NTP is runing, you should get a response similar to the following:
+```
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
++clock.util.phx2 .CDMA.           1 u  111  128  377  175.495    3.076   2.250
+*clock02.util.ph .CDMA.           1 u   69  128  377  175.357    7.641   3.671
+ms21.snowflakeh .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+rs11.lvs.iif.hu .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+2001:470:28:bde .STEP.          16 u    - 1024    0    0.000    0.000   0.000
+```
 How do I configure NTP to run at system start?
 ```
 $ systemctl enable ntpd.service
