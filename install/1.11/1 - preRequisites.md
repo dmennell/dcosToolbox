@@ -202,8 +202,3 @@ sudo reboot
 ```
 
 
-## Individual To Each Cluster Node
-
-Deploy regionZone Identifier File & Modify Accordingly (Master, Public, Private)
-Deploy Attributes File (Public & Private)
-
