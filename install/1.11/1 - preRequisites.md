@@ -7,6 +7,7 @@ Disable Sudo Passwords
 ```
 sudo visudo
 ```
+then remove the `#` from the line following `## Same thing without a password` so that it reads `%wheel  ALL=(ALL)       NOPASSWD: ALL`
 
 Swith to SupeUser Role
 ```
