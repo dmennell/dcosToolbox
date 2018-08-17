@@ -1,56 +1,93 @@
 # DC/OS 1.11 Prerequisites
 Install on all Nodes including Bootstrap, Master, Public Agent and Private Agent Nodes
 
-## SSH into Linux Host
-Using your favorite terminal emulator (OSX Terminal, Termius, iTerm, puTTy, etc.)
+# Step-By-Step Prerequisite Installation Process
 
-## Switch to Superuser or Root
+## Disable Sudo Passwords
+```
+sudo visudo
+```
+
+Swith to SupeUser Role
 ```
 sudo su -
 ```
 
-## Copy and paste as 1 large block of text
+Stop & Disable Firewall
 ```
-#Stop & Disable Firewall
 systemctl stop firewalld && systemctl disable firewalld
-#Set SElinux to Permissive
+```
+
+Set SElinux to Permissive
+```
 sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
 set enforce 0
-#Create Overlay File System
+```
+
+## For RHEL, it is necessary to add the RHEL Entries
+#subscription-manager register --username <RHEL-SUBSCRIPTION-USERNAME> --password ******** --auto-attach
+#subscription-manager repos --enable=rhel-7-server-rpms
+#subscription-manager repos --enable=rhel-7-server-extras-rpms
+#subscription-manager repos --enable=rhel-7-server-optional-rpms
+
+## Create Overlay File System
+```
 echo 'overlay' >> /etc/modules-load.d/overlay.conf
 modprobe overlay
-#Perform OS Updates
+```
+
+## Perform OS Updates
+```
 yum update -y --exclude=docker-engine,docker-engine-selinux,centos-release* --assumeyes --tolerant
-#Install Utility Applications
-yum install -y wget curl zip unzip ipset ntp screen bind-utils net-tools net-tools
-#Install JQ
+```
+
+## Install Utility Applications
+```
+yum install -y wget curl zip unzip ipset ntp screen bind-utils net-tools
+```
+
+## Install JQ
+```
 wget http://stedolan.github.io/jq/download/linux64/jq
 chmod +x ./jq
 cp jq /usr/bin
-#Add Required Groups
+```
+
+## Add Required Groups
+```
 groupadd nogroup
 groupadd docker
-#Disable ipV6
+```
+
+## Disable ipV6
+```
 sed -i -e 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
-#Stop and Disable DNS Masq
+```
+
+## Stop and Disable DNS Masq
+```
 systemctl stop dnsmasq
 systemctl disable dnsmasq.service
-#Install Docker
-echo ">>> Install Docker"
-curl -fLsSv --retry 20 -Y 100000 -y 60 -o /tmp/docker-engine-17.05.0.ce-1.el7.centos.x86_64.rpm \
-  https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-17.05.0.ce-1.el7.centos.x86_64.rpm
-curl -fLsSv --retry 20 -Y 100000 -y 60 -o /tmp/docker-engine-selinux-17.05.0.ce-1.el7.centos.noarch.rpm \
-  https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-selinux-17.05.0.ce-1.el7.centos.noarch.rpm
+```
+
+## Install Docker
+```
+#echo ">>> Install Docker"
+curl -fLsSv --retry 20 -Y 100000 -y 60 -o /tmp/docker-engine-17.06.2.ce-1.el7.centos.x86_64.rpm \
+  https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.06.2.ce-1.el7.centos.x86_64.rpm
 yum -y localinstall /tmp/docker*.rpm || true
 systemctl start docker
 systemctl enable docker
 docker run hello-world
 docker info | grep Storage
-echo ">>> Update /etc/hosts on boot"
+```
 
-#Update Hosts Fileupdate_hosts_script=/usr/local/sbin/dcos-update-etc-hosts
+# Update Hosts File
+```
+echo ">>> Update /etc/hosts on boot"
+Update Hosts Fileupdate_hosts_script=/usr/local/sbin/dcos-update-etc-hosts
 update_hosts_unit=/etc/systemd/system/dcos-update-etc-hosts.service
 mkdir -p "$(dirname $update_hosts_script)"
 cat << 'EOF' > "$update_hosts_script"
@@ -77,7 +114,16 @@ EOF
 systemctl daemon-reload
 systemctl enable $(basename "$update_hosts_unit")
 sync
-#Wait and Reboot
-sleep 4
-reboot
 ```
+
+# Reboot
+```
+sudo reboot
+```
+
+#Individual To Each Cluster Node
+
+Deploy regionZone Identifier File & Modify Accordingly (Master, Public, Private)
+
+Deploy Attributes File
+
