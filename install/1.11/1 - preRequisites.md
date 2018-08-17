@@ -1,7 +1,7 @@
 # DC/OS 1.11 Prerequisites
 This doc provides 2 sets of instructions to install the prerequisites required for DC/OS 1.11 Install.  the first set is a commented "1-at-a-time" process.  The second is a 1-shot scropt that you can copy, paste, and execute in 1 step once you are comfortable with the process.  This process has been tested on CentOS 7.  RHEL may require a different process to install and enable Docker.
 
-# Step-By-Step Prerequisite Installation Process
+## Step-By-Step Prerequisite Installation Process
 
 Disable Sudo Passwords
 ```
@@ -111,12 +111,12 @@ systemctl enable $(basename "$update_hosts_unit")
 sync
 echo ">>> Waiting Then Rebooting"
 sleep 4
+```
 
 reboot
 ```
 sudo reboot
 ```
-
 
 ## Executed as a 1-Shot Script 
 (after Permissions are changed)
@@ -167,7 +167,6 @@ systemctl start docker
 systemctl enable docker
 docker run hello-world
 docker info | grep Storage
-
 echo ">>> Updating Hosts File"
 echo ">>> Update /etc/hosts on boot"
 Update Hosts Fileupdate_hosts_script=/usr/local/sbin/dcos-update-etc-hosts
