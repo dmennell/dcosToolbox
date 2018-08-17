@@ -1,9 +1,9 @@
 # DC/OS 1.11 Prerequisites
-Install on all Nodes including Bootstrap, Master, Public Agent and Private Agent Nodes
+This doc provides 2 sets of instructions to install the prerequisites required for DC/OS 1.11 Install.  the first set is a commented "1-at-a-time" process.  The second is a 1-shot scropt that you can copy, paste, and execute in 1 step once you are comfortable with the process.
 
 # Step-By-Step Prerequisite Installation Process
 
-## Disable Sudo Passwords
+Disable Sudo Passwords
 ```
 sudo visudo
 ```
@@ -24,55 +24,55 @@ sed -i s/SELINUX=enforcing/SELINUX=permissive/g /etc/selinux/config
 set enforce 0
 ```
 
-## For RHEL, it is necessary to add the RHEL Entries
+For RHEL, it is necessary to add the RHEL Entries
 #subscription-manager register --username <RHEL-SUBSCRIPTION-USERNAME> --password ******** --auto-attach
 #subscription-manager repos --enable=rhel-7-server-rpms
 #subscription-manager repos --enable=rhel-7-server-extras-rpms
 #subscription-manager repos --enable=rhel-7-server-optional-rpms
 
-## Create Overlay File System
+Create Overlay File System
 ```
 echo 'overlay' >> /etc/modules-load.d/overlay.conf
 modprobe overlay
 ```
 
-## Perform OS Updates
+Perform OS Updates
 ```
 yum update -y --exclude=docker-engine,docker-engine-selinux,centos-release* --assumeyes --tolerant
 ```
 
-## Install Utility Applications
+Install Utility Applications
 ```
 yum install -y wget curl zip unzip ipset ntp screen bind-utils net-tools
 ```
 
-## Install JQ
+Install JQ
 ```
 wget http://stedolan.github.io/jq/download/linux64/jq
 chmod +x ./jq
 cp jq /usr/bin
 ```
 
-## Add Required Groups
+Add Required Groups
 ```
 groupadd nogroup
 groupadd docker
 ```
 
-## Disable ipV6
+Disable ipV6
 ```
 sed -i -e 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
 sysctl -w net.ipv6.conf.all.disable_ipv6=1
 sysctl -w net.ipv6.conf.default.disable_ipv6=1
 ```
 
-## Stop and Disable DNS Masq
+Stop and Disable DNS Masq
 ```
 systemctl stop dnsmasq
 systemctl disable dnsmasq.service
 ```
 
-## Install Docker
+Install Docker
 ```
 #echo ">>> Install Docker"
 curl -fLsSv --retry 20 -Y 100000 -y 60 -o /tmp/docker-engine-17.06.2.ce-1.el7.centos.x86_64.rpm \
@@ -84,7 +84,7 @@ docker run hello-world
 docker info | grep Storage
 ```
 
-# Update Hosts File
+Update Hosts File
 ```
 echo ">>> Update /etc/hosts on boot"
 Update Hosts Fileupdate_hosts_script=/usr/local/sbin/dcos-update-etc-hosts
@@ -116,12 +116,12 @@ systemctl enable $(basename "$update_hosts_unit")
 sync
 ```
 
-# Reboot
+Reboot
 ```
 sudo reboot
 ```
 
-#Individual To Each Cluster Node
+# Individual To Each Cluster Node
 
 Deploy regionZone Identifier File & Modify Accordingly (Master, Public, Private)
 
