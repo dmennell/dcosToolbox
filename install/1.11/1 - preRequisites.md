@@ -38,6 +38,7 @@ yum update -y --exclude=docker-engine,docker-engine-selinux,centos-release* --as
 
 Install Utility Applications
 ```
+yum install -y \
     bash \
     bind-utils \
     curl \
