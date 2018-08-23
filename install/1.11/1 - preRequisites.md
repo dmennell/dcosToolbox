@@ -38,7 +38,21 @@ yum update -y --exclude=docker-engine,docker-engine-selinux,centos-release* --as
 
 Install Utility Applications
 ```
-yum install -y wget curl zip unzip ipset ntp screen bind-utils net-tools
+    bash \
+    bind-utils \
+    curl \
+    coreutils \
+    gawk \
+    gettext \
+    grep \
+    iproute \
+    net-tools \
+    util-linux \
+    screen \
+    sed \
+    unzip \
+    wget \
+    zip
 ```
 
 Install JQ
