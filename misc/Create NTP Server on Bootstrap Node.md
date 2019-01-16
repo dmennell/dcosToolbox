@@ -22,7 +22,6 @@ echo -e '\nrestrict 172.12.0.0 mask 255.255.0.0 nomodify notrap\n' | sudo tee -a
 systemctl restart ntpd
 ```
 
-
 ## On All Cluster Nodes (Masters & Agents)  
 This example was created for RHEL systems that use CHRONYD for time synchronization purposes.  Please modify as necessary for systems that are using NTPD for time synchronization.
 
@@ -32,7 +31,7 @@ sudo su
 ```
 
 #### Delete Old Entries and Add The Bootstrap As Time Server
-This example add the local Bootstrap node as the time server (172.12.0.81) and and removes the AWS time server (169.254.169.123).  Please The /etc/chrony.conf file can be modified by han d using VI or your favorite text editor as well.
+This example add the local Bootstrap node as the time server (172.12.0.81) and and removes the AWS time server (169.254.169.123).  Please modify to fit your environment.  The /etc/chrony.conf file can be modified by hand using VI or your favorite text editor as well.
 ```
 sed -i '/^server/d' /etc/chrony.conf
 echo -e '\nserver 172.12.0.81 iburst\nserver 169.254.169.123 iburst\n' | sudo tee -a /etc/chrony.conf
